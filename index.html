@@ -1,1 +1,63 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f3ede2"><link rel="manifest" href="manifest.json"><title>松贊干布吉祥頌｜每日練習</title><style>body{margin:0;background:#f3ede2;color:#302b27;font-family:-apple-system,BlinkMacSystemFont,"Noto Serif TC","PingFang TC","Songti TC",serif}.top{text-align:center;padding:18px}.title{font-size:20px}.sub{font-size:12px;color:#86796b;margin-top:4px}.toolbar{display:flex;justify-content:center;gap:8px;margin-top:10px}.toolbar button,.nav button{border:0;border-radius:999px;padding:9px 12px;background:#e7dccb;color:#302b27}.toolbar button{font-size:12px}#book{padding:10px 14px;min-height:78vh;display:flex;justify-content:center;touch-action:pan-y}.page{width:min(780px,100%);background:#fffdf8;border-radius:24px;box-shadow:0 16px 40px #34281e1c;padding:26px 22px;min-height:70vh;display:flex;flex-direction:column}.badge{font:700 12px -apple-system,BlinkMacSystemFont,sans-serif;color:#8e6b4f;letter-spacing:.12em}.date{font-size:28px;margin-top:7px}.time{font:12px -apple-system,BlinkMacSystemFont,sans-serif;color:#86796b;margin:4px 0 20px}.line{padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid #e8dfd1}.en{font-size:21px;line-height:1.6}.zh{font-size:16px;line-height:1.75;color:#6f655c;margin-top:7px}.nav{display:flex;gap:8px;margin-top:auto;padding-top:16px}.nav button{flex:1;font-size:12px}.nav .main{background:#8e6b4f;color:#fff}.counter{text-align:center;color:#86796b;font-size:11px;margin-top:8px}@media(max-width:520px){.page{padding:23px 18px}.en{font-size:20px}.date{font-size:26px}}</style></head><body><div class="top"><div class="title">松贊干布吉祥頌</div><div class="sub">32 天英文歌詞・中文・發音對照</div><div class="toolbar"><button onclick="goToday()">今天</button><button onclick="fontSize()">字級</button><button onclick="toggleDark()">夜間</button></div></div><div id="book"></div><script>let D=[],i=0,large=false;fetch('data.json').then(r=>r.json()).then(x=>{D=x;goToday()});function todayIndex(){const n=new Date(),t=new Date(n.getFullYear(),n.getMonth(),n.getDate()),s=new Date(n.getFullYear(),8,14);return Math.max(0,Math.min(31,Math.round((t-s)/86400000)))}function goToday(){i=todayIndex();render()}function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}function render(){const d=D[i];document.getElementById('book').innerHTML='<article class="page"><div class="badge">DAY '+d.day+' · '+d.date+'</div><div class="date">'+d.date+'</div><div class="time">'+d.time+'</div>'+d.lines.map(x=>'<div class="line"><div class="en">'+esc(x[0])+'</div><div class="zh">'+esc(x[1])+'</div></div>').join('')+(d.vocab.length?'<div><b style="color:#8e6b4f">發音與詞義</b>'+d.vocab.map(v=>'<div style="padding:8px 0;border-bottom:1px dashed #e8dfd1"><b>'+esc(v[0])+'</b> '+esc(v[1])+'<br><span style="font-size:13px;color:#86796b">'+esc(v[2])+'｜'+esc(v[3])+'</span></div>').join('')+'</div>':'')+'<div class="nav"><button onclick="prev()">◀ 上一天</button><button class="main" onclick="speakDay()">🔊 朗讀本日英文</button><button onclick="next()">下一天 ▶</button></div><div class="counter">'+(i+1)+' / '+D.length+'</div></article>'}function prev(){i=(i+31)%32;render()}function next(){i=(i+1)%32;render()}function fontSize(){document.querySelector('.page').style.fontSize=document.querySelector('.page').style.fontSize==='18px'?'':'18px'}function toggleDark(){document.body.style.background=document.body.style.background==='#1d1b19'?'#f3ede2':'#1d1b19';document.body.style.color=document.body.style.color==='#eee7dd'?'#302b27':'#eee7dd'}function speakDay(){const u=new SpeechSynthesisUtterance(D[i].lines.map(x=>x[0]).join(' '));u.lang='en-US';u.rate=.8;speechSynthesis.cancel();speechSynthesis.speak(u)}let sx=0;document.getElementById('book').addEventListener('touchstart',e=>sx=e.changedTouches[0].clientX,{passive:true});document.getElementById('book').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>55){dx<0?next():prev()}},{passive:true});</script></body></html>
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f3ede2">
+<link rel="manifest" href="manifest.json">
+<title>松贊干布吉祥頌｜每日練習</title>
+<style>
+:root{--bg:#f3ede2;--paper:#fffdf8;--ink:#302b27;--muted:#86796b;--line:#e8dfd1;--accent:#8e6b4f;--soft:#eee4d6}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Serif TC","PingFang TC","Songti TC",serif}
+.top{text-align:center;padding:16px 18px 10px;position:sticky;top:0;background:rgba(243,237,226,.94);backdrop-filter:blur(8px);z-index:5}
+.title{font-size:20px;letter-spacing:.08em}.sub{font-size:12px;color:var(--muted);margin-top:4px}.toolbar{display:flex;justify-content:center;gap:7px;margin-top:9px}.toolbar button,.nav button,.practice button{border:0;border-radius:999px;padding:9px 12px;background:var(--soft);color:var(--ink);font-size:12px}
+#book{padding:10px 14px 24px;min-height:75vh;display:flex;justify-content:center;touch-action:pan-y}
+.page{width:min(780px,100%);background:var(--paper);border-radius:24px;box-shadow:0 16px 40px rgba(52,40,30,.11);padding:25px 22px;min-height:68vh;display:flex;flex-direction:column;animation:turn .25s ease}
+@keyframes turn{from{opacity:.35;transform:perspective(900px) rotateY(7deg)}to{opacity:1;transform:perspective(900px) rotateY(0)}}
+.badge{font:700 12px -apple-system,BlinkMacSystemFont,sans-serif;color:var(--accent);letter-spacing:.12em}.date{font-size:28px;margin-top:7px}.time{font:12px -apple-system,BlinkMacSystemFont,sans-serif;color:var(--muted);margin:4px 0 20px}
+.line{padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--line)}.en{font-size:21px;line-height:1.6}.zh{font-size:16px;line-height:1.75;color:#6f655c;margin-top:7px}
+.nav{display:flex;gap:8px;margin-top:auto;padding-top:16px}.nav button{flex:1}.nav .main{background:var(--accent);color:#fff}.counter{text-align:center;color:var(--muted);font-size:11px;margin-top:8px}
+.practice{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}.practice h3{margin:0 0 4px;font-size:16px}.practice .hint{color:var(--muted);font-size:12px;line-height:1.6;margin-bottom:12px}.step{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:11px 0;border-bottom:1px dashed var(--line)}.step input{width:20px;height:20px}.step b{font-size:14px}.step small{display:block;color:var(--muted);font-size:11px;margin-top:2px}.timer{margin-top:14px;padding:14px;border-radius:16px;background:var(--soft);text-align:center}.timerNum{font:700 31px -apple-system,BlinkMacSystemFont,sans-serif;color:var(--accent);letter-spacing:.05em}.timerBtns{display:flex;justify-content:center;gap:8px;margin-top:9px}.review{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.review button{background:#e7dccb}
+.big .en{font-size:25px}.big .zh{font-size:19px}
+.dark{--bg:#1d1b19;--paper:#292621;--ink:#eee7dd;--muted:#b5aa9d;--line:#433c34;--accent:#c79e78;--soft:#3a342d}.dark .top{background:rgba(29,27,25,.94)}
+@media(max-width:520px){.page{padding:23px 18px}.en{font-size:20px}.date{font-size:26px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="title">松贊干布吉祥頌</div><div class="sub">32 天英文歌詞・中文・發音對照</div>
+<div class="toolbar"><button onclick="goToday()">今天</button><button onclick="fontSize()">字級</button><button onclick="toggleDark()">夜間</button><button onclick="scrollPractice()">10 分鐘</button></div></div>
+<div id="book"></div>
+<script>
+let D=[],i=0,large=false,timer=null,remain=0;
+fetch('data.json').then(r=>r.json()).then(x=>{D=x;goToday()});
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function todayIndex(){const n=new Date(),t=new Date(n.getFullYear(),n.getMonth(),n.getDate()),s=new Date(n.getFullYear(),8,14);return Math.max(0,Math.min(31,Math.round((t-s)/86400000)))}
+function goToday(){i=todayIndex();render()}
+function practiceKey(){const d=D[i];return 'ks-practice-'+new Date().getFullYear()+'-'+d.day}
+function loadChecks(){try{return JSON.parse(localStorage.getItem(practiceKey())||'[]')}catch(e){return[]}}
+function saveChecks(a){localStorage.setItem(practiceKey(),JSON.stringify(a))}
+function toggleStep(n){const a=loadChecks();if(a.includes(n))a.splice(a.indexOf(n),1);else a.push(n);saveChecks(a);render()}
+function stepChecked(n){return loadChecks().includes(n)?'checked':''}
+function practiceHtml(){
+ const prev=i-1, prev3=i-3, review=[];
+ if(prev>=0)review.push('<button onclick="jump('+prev+')">昨日 · Day '+D[prev].day+'</button>');
+ if(prev3>=0)review.push('<button onclick="jump('+prev3+')">3天前 · Day '+D[prev3].day+'</button>');
+ return '<div class="practice" id="practice"><h3>今天 10 分鐘背誦流程</h3><div class="hint">不用一次背到完美。把「聽、跟唱、脫稿、複習」跑一輪，就算完成。</div>'+
+ ['聽旋律與英文 · 2 分鐘','看英文跟唱 · 3 分鐘','關掉文字，自己唱 · 3 分鐘','回顧昨天／3天前 · 2 分鐘'].map((t,k)=>'<label class="step"><input type="checkbox" '+stepChecked(k)+' onchange="toggleStep('+k+')"><span><b>'+t+'</b><small>'+(k===0?'先聽 2～3 次，不急著背。':k===1?'模仿節奏，讓旋律帶著英文走。':k===2?'想不起來也沒關係，先唱出骨架。':'只唱一次，讓舊內容保持熟悉。')+'</small></span><button onclick="startTimer('+(k===0?120:k===1?180:k===2?180:120)+')">計時</button></label>').join('')+
+ '<div class="timer"><div id="timerNum" class="timerNum">10:00</div><div class="timerBtns"><button onclick="startTimer(600)">開始 10 分鐘</button><button onclick="stopTimer()">暫停</button><button onclick="resetTimer()">重設</button></div></div>'+
+ (review.length?'<div class="review"><span style="font-size:12px;color:var(--muted);width:100%">回顧：</span>'+review.join('')+'</div>':'')+'</div>'
+}
+function render(){const d=D[i];if(!d)return;document.getElementById('book').innerHTML='<article class="page '+(large?'big':'')+'"><div class="badge">DAY '+d.day+' · '+d.date+'</div><div class="date">'+d.date+'</div><div class="time">'+d.time+'</div>'+d.lines.map(x=>'<div class="line"><div class="en">'+esc(x[0])+'</div><div class="zh">'+esc(x[1])+'</div></div>').join('')+practiceHtml()+'<div class="nav"><button onclick="prev()">◀ 上一天</button><button class="main" onclick="speakDay()">🔊 朗讀本日英文</button><button onclick="next()">下一天 ▶</button></div><div class="counter">'+(i+1)+' / '+D.length+'</div></article>';updateTimerUI();localStorage.setItem('kingSongDay',i)}
+function prev(){stopTimer();i=(i+31)%32;render()}function next(){stopTimer();i=(i+1)%32;render()}function jump(n){stopTimer();i=n;render();scrollPractice()}
+function scrollPractice(){setTimeout(()=>document.getElementById('practice')?.scrollIntoView({behavior:'smooth',block:'start'}),60)}
+function fontSize(){large=!large;render()}
+function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('kingSongDark',document.body.classList.contains('dark'))}
+if(localStorage.getItem('kingSongDark')==='true')document.body.classList.add('dark')
+function speakDay(){const u=new SpeechSynthesisUtterance(D[i].lines.map(x=>x[0]).join(' '));u.lang='en-US';u.rate=.8;speechSynthesis.cancel();speechSynthesis.speak(u)}
+function updateTimerUI(){const e=document.getElementById('timerNum');if(!e)return;const m=Math.floor(remain/60),s=remain%60;e.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
+function startTimer(sec){clearInterval(timer);if(remain<=0||remain>sec)remain=sec;updateTimerUI();timer=setInterval(()=>{remain--;updateTimerUI();if(remain<=0){clearInterval(timer);timer=null;navigator.vibrate?.([150,80,150]);alert('這一段完成了，可以勾起來。')}},1000)}
+function stopTimer(){clearInterval(timer);timer=null}
+function resetTimer(){stopTimer();remain=600;updateTimerUI()}
+let sx=0;const book=document.getElementById('book');book.addEventListener('touchstart',e=>sx=e.changedTouches[0].clientX,{passive:true});book.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>55){dx<0?next():prev()}},{passive:true});document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')prev();if(e.key==='ArrowRight')next()});resetTimer();
+</script>
+</body></html>
